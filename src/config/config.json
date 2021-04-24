@@ -1,0 +1,10 @@
+{
+  "database": "korapay",
+  "username": "root",
+  "password": null,
+  "params": {
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
