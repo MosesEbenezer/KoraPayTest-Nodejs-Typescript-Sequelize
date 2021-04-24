@@ -16,5 +16,11 @@ export const createModels = (sequelizeConfig: any): DbInterface => {
     User: UserFactory(sequelize, Sequelize)
   };
 
+  Object.keys(db).forEach((modelName: string) => (db: Record<string, any>) => { // probably has made us loose the strong typings
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
+  });
+
   return db;
 };
