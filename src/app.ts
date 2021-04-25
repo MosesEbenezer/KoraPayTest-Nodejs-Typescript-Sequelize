@@ -5,7 +5,6 @@ import cors from 'cors';
 
 import { createModels } from './models';
 import Route from './routes/api.route';
-import { tokenGuard } from './middlewares/token-guard'
 
 // const swaggerFile = import('../swagger_output.json');
 
