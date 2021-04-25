@@ -42,7 +42,7 @@ export class UserService {
 					return;
 				}
 
-				UserService._user = db.User.findById(decoded['id']);
+				UserService._user = db.User.findById(decoded!['id']);
 				resolve(true);
 				return;
 			});
