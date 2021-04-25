@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import * as Bluebird from 'Bluebird';
+import * as bluebird from 'bluebird';
 import {
 	// User, UserModel, UserInstance, UserViewModel
 	UserInstance,
@@ -16,7 +16,7 @@ export class UserService {
 	static get userAttributes() {
 		return ['id', 'email'];
 	}
-	private static _user: import('Bluebird')<UserInstance | null>;
+	private static _user: import('bluebird')<UserInstance | null>;
 	static get user() {
 		return UserService._user;
 	}
@@ -52,6 +52,6 @@ export class UserService {
 	getUserById(id: number | undefined) {
 		return (db.User.findById(id, {
 			attributes: UserService.userAttributes,
-		}) as unknown) as Bluebird<UserInstance>;
+		}) as unknown) as bluebird<UserInstance>;
 	}
 }

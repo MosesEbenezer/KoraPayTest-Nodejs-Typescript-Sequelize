@@ -4,7 +4,7 @@ import { UserFactory } from './User';
 import { QuestionFactory } from './Question';
 import { AnswerFactory } from './Answer';
 
-const sequelizeConfig = require('./config/config.json');
+const sequelizeConfig = require('../config/config.json');
 
 export const createModels = (): DbInterface => {
   const { database, username, password, params } = sequelizeConfig;
