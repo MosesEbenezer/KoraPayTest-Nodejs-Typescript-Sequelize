@@ -4,9 +4,8 @@ import cors from 'cors';
 // import swaggerUi from 'swagger-ui-express';
 
 import { createModels } from './models';
-const sequelizeConfig = require('./config/config.json');
-
 import Route from './routes/api.route';
+import { tokenGuard } from './middlewares/token-guard'
 
 // const swaggerFile = import('../swagger_output.json');
 
@@ -57,7 +56,7 @@ class Server {
 	// }
 
 	initDB() {
-    const db = createModels(sequelizeConfig);
+    const db = createModels();
 		db.sequelize.sync().then(() => {
 			console.log(`Successfully connected to the database`);
 		});

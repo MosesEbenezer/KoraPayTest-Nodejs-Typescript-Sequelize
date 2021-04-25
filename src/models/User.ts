@@ -5,7 +5,7 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface UserAttributes {
   id?: number;
-  name: string;
+  // name: string;
   email: string;
   password: string; // remember the hashing
   createdAt?: Date;
@@ -56,9 +56,14 @@ export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAt
 
 export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<UserInstance, UserAttributes> => {
   const attributes: SequelizeAttributes<UserAttributes> = {
-    name: {
-      type: DataTypes.STRING
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
+    // name: {
+    //   type: DataTypes.STRING
+    // },
     email: {
       type: DataTypes.STRING
     },
