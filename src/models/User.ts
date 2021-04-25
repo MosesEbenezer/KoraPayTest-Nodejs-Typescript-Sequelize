@@ -5,7 +5,6 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface UserAttributes {
   id?: number;
-  // name: string;
   email: string;
   password: string; // remember the hashing
   createdAt?: Date;
@@ -61,9 +60,6 @@ export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize
       autoIncrement: true,
       primaryKey: true
     },
-    // name: {
-    //   type: DataTypes.STRING
-    // },
     email: {
       type: DataTypes.STRING
     },

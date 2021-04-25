@@ -6,6 +6,9 @@ import BaseController from './BaseController';
 import { UserService } from '../services/user.service';
 import { UserInstance } from '../models/User';
 
+import { createModels } from '../models';
+const db = createModels();
+
 const userService = new UserService();
 
 class AuthenticationController extends BaseController {
@@ -22,10 +25,16 @@ class AuthenticationController extends BaseController {
 				return AuthenticationController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 			}
 
+			const existingUser = await db.User.findOne({
+				where: { email: req.body.email },
+			});
+
+			if (existingUser) return AuthenticationController._responseError(res, 'KPT009', 'Email exists', null, 409);
+
 			const payload = matchedData(req) as UserInstance;
 			const user = userService.register(payload);
 
-			return user.then((u) => res.json(u));
+			return user.then((u) => AuthenticationController._responseSuccess(res, '00', 'Successfully Registered', u, 200));
 		} catch (error) {
 			return AuthenticationController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}

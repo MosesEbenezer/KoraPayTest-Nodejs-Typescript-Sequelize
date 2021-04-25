@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import BaseController from './BaseController';
+import { matchedData } from 'express-validator/filter';
 import { validationResult } from 'express-validator';
 import { QuestionInstance } from '../models/Question';
 
@@ -19,7 +20,11 @@ class QuestionsController extends BaseController {
 			if (!errors.isEmpty())
 				return QuestionsController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 
-			const question: QuestionInstance = await db.Question.create(req.body);
+			const existingQuestion = await db.Question.findOne(req.body);
+			if (existingQuestion) return QuestionsController._responseError(res, 'KPT009', 'Duplicate Question', null, 409);
+
+			const payload = matchedData(req) as QuestionInstance;
+			const question: QuestionInstance = await db.Question.create(payload);
 
 			if (question) return QuestionsController._responseSuccess(res, '00', 'Successfully Created', question, 200);
 		} catch (error) {
