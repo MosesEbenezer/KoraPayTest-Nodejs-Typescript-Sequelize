@@ -1,3 +1,4 @@
-import AuthenticationController from './AuthenticationController'
+import AuthenticationController from './AuthenticationController';
+import QuestionsController from './QuestionsController';
 
-export { AuthenticationController }
+export { AuthenticationController, QuestionsController }

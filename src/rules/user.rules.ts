@@ -4,8 +4,6 @@ import { check } from 'express-validator/check'
 import { createModels } from '../models';
 const db = createModels();
 
-// import { UserInstance } from '../models/User'
-
 export const userRules = {
   forRegister: [
     check('email')

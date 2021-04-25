@@ -1,10 +1,7 @@
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import * as bluebird from 'bluebird';
-import {
-	// User, UserModel, UserInstance, UserViewModel
-	UserInstance,
-} from '../models/User';
+import { UserInstance } from '../models/User';
 
 import { createModels } from '../models';
 const db = createModels();

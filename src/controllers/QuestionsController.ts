@@ -1,60 +1,51 @@
 import { Request, Response } from 'express';
 import BaseController from './BaseController';
 import { validationResult } from 'express-validator';
-// import {sequelize, db} from '../../models';
+import { QuestionInstance } from '../models/Question';
 
-class firstController extends BaseController {
+import { createModels } from '../models';
+const db = createModels();
+
+class QuestionsController extends BaseController {
 	constructor(req: Request, res: Response) {
 		super(req, res);
 		this.req = req;
 		this.res = res;
 	}
 
-	static _create = async (req: Request, res: Response) => {
+	static _createQuestion = async (req: Request, res: Response) => {
 		try {
-      // validate request body
 			const errors = validationResult(req);
-			if (!errors.isEmpty()) {
-				return firstController._responseError(res, 'ECS004', 'Validation failed', errors.array(), 422);
-			}
+			if (!errors.isEmpty())
+				return QuestionsController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 
+			const question: QuestionInstance = await db.Question.create(req.body);
 
-
+			if (question) return QuestionsController._responseSuccess(res, '00', 'Successfully Created', question, 200);
 		} catch (error) {
-			return firstController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
+			return QuestionsController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
 
-	static _get = async (req: Request, res: Response) => {
+	static _getQuestions = async (req: Request, res: Response) => {
 		try {
-			
-
-			return firstController._responseSuccess(res, '00', 'Successfully Fetched', null, 200);
+			const questions: QuestionInstance[] = await db.Question.findAll();
+			return QuestionsController._responseSuccess(res, '00', 'Successfully Fetched', questions, 200);
 		} catch (error) {
-			return firstController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
+			return QuestionsController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
 
-	static _update = async (req: Request, res: Response) => {
+	static _getAQuestion = async (req: Request, res: Response) => {
 		try {
-			
-
-			return firstController._responseSuccess(res, '00', 'successfully Updated', null, 200);
+			const question: QuestionInstance[] = await db.Question.findAll({
+				where: { id: req.params.id },
+			});
+			return QuestionsController._responseSuccess(res, '00', 'Successfully Fetched', question, 200);
 		} catch (error) {
-			return firstController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
+			return QuestionsController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
-
-	static _delete = async (req: Request, res: Response) => {
-		try {
-		
-
-			firstController._responseSuccess(res, '00', 'Deleted Successfully', null, 200);
-		} catch (error) {
-			return firstController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
-		}
-	};
-
 }
 
-export default firstController;
+export default QuestionsController;

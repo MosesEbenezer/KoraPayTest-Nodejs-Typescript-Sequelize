@@ -5,7 +5,6 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface QuestionAttributes {
   id?: number;
-  name: string;
   title: string;
   text: string;
   createdAt?: Date;
@@ -34,9 +33,6 @@ export interface QuestionInstance extends Sequelize.Instance<QuestionAttributes>
 
 export const QuestionFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<QuestionInstance, QuestionAttributes> => {
   const attributes: SequelizeAttributes<QuestionAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
     title: {
       type: DataTypes.STRING
     },

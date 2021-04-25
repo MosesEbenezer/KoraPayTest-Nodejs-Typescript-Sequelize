@@ -19,7 +19,7 @@ class AuthenticationController extends BaseController {
 		try {
 			const errors = validationResult(req);
 			if (!errors.isEmpty()) {
-				return AuthenticationController._responseError(res, 'ECS004', 'Validation failed', errors.array(), 422);
+				return AuthenticationController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 			}
 
 			const payload = matchedData(req) as UserInstance;
@@ -27,7 +27,7 @@ class AuthenticationController extends BaseController {
 
 			return user.then((u) => res.json(u));
 		} catch (error) {
-			return AuthenticationController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
+			return AuthenticationController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
 
@@ -36,7 +36,7 @@ class AuthenticationController extends BaseController {
 			const errors = validationResult(req);
 
 			if (!errors.isEmpty()) {
-				return AuthenticationController._responseError(res, 'ECS004', 'Validation failed', errors.array(), 422);
+				return AuthenticationController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 			}
 
 			const payload = matchedData(req) as UserInstance;
@@ -44,7 +44,7 @@ class AuthenticationController extends BaseController {
 
 			return token.then((t) => res.json(t));
 		} catch (error) {
-			return AuthenticationController._responseError(res, 'ECS005', 'An Error Occured', error, 500);
+			return AuthenticationController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
 }
