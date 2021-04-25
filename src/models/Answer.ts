@@ -11,7 +11,6 @@ export interface AnswerAttributes {
 
 
   question?: QuestionAttributes | QuestionAttributes['id'];
-
   author?: UserAttributes | UserAttributes['id'];
 
   // `upvoters` is a BelongsToMany association, so we define that
@@ -45,6 +44,12 @@ export const AnswerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
   const attributes: SequelizeAttributes<AnswerAttributes> = {
     text: {
       type: DataTypes.STRING(1000)
+    },
+    question: {
+      type: DataTypes.INTEGER
+    },
+    author: {
+      type: DataTypes.INTEGER
     }
   };
 
@@ -54,7 +59,7 @@ export const AnswerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
     Answer.belongsTo(models.Question);
     Answer.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
     Answer.belongsToMany(models.User, {
-      through: 'QuestionUpvotes',
+      through: 'AnswerUpvotes',
       as: 'upvoters'
     });
   };

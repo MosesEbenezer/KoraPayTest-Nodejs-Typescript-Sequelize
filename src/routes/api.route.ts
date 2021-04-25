@@ -19,6 +19,13 @@ router.get('/question/:id', Controller.QuestionsController._getAQuestion)
 // Protected Routes
 app.use(tokenGuard())
 router.post('/question', otherValidatorRules['createQuestion'], Controller.QuestionsController._createQuestion)
+router.post('/answer', otherValidatorRules['addAnswer'], Controller.AnswersController._addAnswer)
+router.get('/answer/:id/upvoters', Controller.AnswersController._getAnswerUpvoters)
+
+// Remaining
+// upvote and down vote answers
+// get answers alongside the upvote and downvotes
+// subscribe to questions
 
 
 

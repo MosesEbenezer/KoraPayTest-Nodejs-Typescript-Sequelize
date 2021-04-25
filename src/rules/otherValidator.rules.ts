@@ -6,7 +6,9 @@ export const otherValidatorRules = {
 		body('title', 'title is required').exists().notEmpty(),
 		body('text', 'text is required').exists().notEmpty(),
   ],
-  forMore: [
-    
+  addAnswer: [
+    body('author', 'author (id) is required').exists().notEmpty().isNumeric(),
+		body('question', 'question (id) is required').exists().notEmpty().isNumeric(),
+		body('text', 'text is required').exists().notEmpty(),
   ]
 }
