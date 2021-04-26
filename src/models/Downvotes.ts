@@ -9,9 +9,6 @@ export interface DownvoteAttributes {
   userId: UserAttributes | UserAttributes['id'];
   createdAt?: Date;
   updatedAt?: Date;
-
-  // answers?: AnswerAttributes[] | AnswerAttributes['id'][];
-  // author: UserAttributes | UserAttributes['id'];
 };
 
 export interface DownvoteInstance extends Sequelize.Instance<DownvoteAttributes>, DownvoteAttributes {

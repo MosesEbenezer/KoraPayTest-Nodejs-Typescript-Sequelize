@@ -10,11 +10,11 @@ export interface QuestionAttributes {
   text: string;
   createdAt?: Date;
   updatedAt?: Date;
-
-  answers?: AnswerAttributes[] | AnswerAttributes['id'][];
   author: UserAttributes | UserAttributes['id'];
-  subscriptions?: SubscriptionAttributes[] | SubscriptionAttributes['id'][];
-  subscribers?: UserAttributes[] | UserAttributes['id'];
+
+  // answers?: AnswerAttributes[] | AnswerAttributes['id'][];
+  // subscriptions?: SubscriptionAttributes[] | SubscriptionAttributes['id'][];
+  // subscribers?: UserAttributes[] | UserAttributes['id'];
 };
 
 export interface QuestionInstance extends Sequelize.Instance<QuestionAttributes>, QuestionAttributes {
@@ -46,7 +46,7 @@ export const QuestionFactory = (sequelize: Sequelize.Sequelize, DataTypes: Seque
       type: DataTypes.INTEGER
     },
     // answers: {
-    //   type: DataTypes.ARRAY,
+    //   type: DataTypes.JSON,
     // }
   };
 

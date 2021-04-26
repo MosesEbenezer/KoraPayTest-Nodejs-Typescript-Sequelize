@@ -10,13 +10,13 @@ export interface AnswerAttributes {
   text: string;
   createdAt?: Date;
   updatedAt?: Date;
-
-  question?: QuestionAttributes | QuestionAttributes['id'];
   author?: UserAttributes | UserAttributes['id'];
-  upvotes?: UpvoteAttributes[] | UpvoteAttributes['id'];
-  downvotes?: DownvoteAttributes[] | DownvoteInstance['id'];
-  downvoters?: UserAttributes[] | UserAttributes['id'];
-  upvoters?: UserAttributes[] | UserAttributes['id'][];
+  question?: QuestionAttributes | QuestionAttributes['id'];
+
+  // upvotes?: UpvoteAttributes[] | UpvoteAttributes['id'];
+  // downvotes?: DownvoteAttributes[] | DownvoteInstance['id'];
+  // downvoters?: UserAttributes[] | UserAttributes['id'];
+  // upvoters?: UserAttributes[] | UserAttributes['id'][];
 };
 
 export interface AnswerInstance extends Sequelize.Instance<AnswerAttributes>, AnswerAttributes {

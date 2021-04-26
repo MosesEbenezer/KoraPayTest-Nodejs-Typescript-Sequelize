@@ -3,6 +3,10 @@ import { DbInterface } from'../typings/DbInterface';
 import { UserFactory } from './User';
 import { QuestionFactory } from './Question';
 import { AnswerFactory } from './Answer';
+import { SubscriptionFactory } from './Subscription';
+import { NotificationFactory } from './Notification';
+import { UpvoteFactory } from './Upvotes';
+import { DownvoteFactory } from './Downvotes'
 
 const sequelizeConfig = require('../config/config.json');
 
@@ -15,7 +19,11 @@ export const createModels = (): DbInterface => {
     Sequelize,
     Answer: AnswerFactory(sequelize, Sequelize),
     Question: QuestionFactory(sequelize, Sequelize),
-    User: UserFactory(sequelize, Sequelize)
+    User: UserFactory(sequelize, Sequelize),
+    Subscription: SubscriptionFactory(sequelize, Sequelize),
+    Notification: NotificationFactory(sequelize, Sequelize),
+    Upvote: UpvoteFactory(sequelize, Sequelize),
+    Downvote: DownvoteFactory(sequelize, Sequelize),
   };
 
   Object.keys(db).forEach((modelName: string) => (db: Record<string, any>) => { // probably has made us loose the strong typings

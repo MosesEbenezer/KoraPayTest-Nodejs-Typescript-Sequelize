@@ -9,5 +9,6 @@ const router = Router();
 // Protected Routes
 router.post('/question', otherValidatorRules['createQuestion'], Controller.QuestionsController._createQuestion)
 router.post('/answer', otherValidatorRules['addAnswer'], Controller.AnswersController._addAnswer)
+// add subscription
 
 export default router;

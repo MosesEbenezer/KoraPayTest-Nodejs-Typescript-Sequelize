@@ -10,9 +10,9 @@ export interface UserAttributes {
   createdAt?: Date;
   updatedAt?: Date;
 
-  answers?: AnswerAttributes[] | AnswerAttributes['id'][];
-  questions?: QuestionAttributes[] | QuestionAttributes['id'][];
-  upvotedAnswers?: AnswerAttributes[] | AnswerAttributes['id'][];
+  // answers?: AnswerAttributes[] | AnswerAttributes['id'][];
+  // questions?: QuestionAttributes[] | QuestionAttributes['id'][];
+  // upvotedAnswers?: AnswerAttributes[] | AnswerAttributes['id'][];
 };
 
 // second type each model needs is a ModelInstance. This represents a Sequelize instance for an actual database row.

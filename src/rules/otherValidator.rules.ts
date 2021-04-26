@@ -10,5 +10,9 @@ export const otherValidatorRules = {
     body('author', 'author (id) is required').exists().notEmpty().isNumeric(),
 		body('question', 'question (id) is required').exists().notEmpty().isNumeric(),
 		body('text', 'text is required').exists().notEmpty(),
+  ],
+  addSubscription: [
+    body('user', 'user (id) is required').exists().notEmpty().isNumeric(),
+		body('question', 'question (id) is required').exists().notEmpty().isNumeric(),
   ]
 }
