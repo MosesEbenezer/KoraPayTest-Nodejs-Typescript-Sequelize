@@ -6,11 +6,9 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 export interface UserAttributes {
   id?: number;
   email: string;
-  password: string; // remember the hashing
+  password: string;
   createdAt?: Date;
   updatedAt?: Date;
-  // with ? are optional, when creating a new instance of a model, we don’t want to be
-  // forced to specify these fields. All set automatically by sequelize.
 
   answers?: AnswerAttributes[] | AnswerAttributes['id'][];
   questions?: QuestionAttributes[] | QuestionAttributes['id'][];

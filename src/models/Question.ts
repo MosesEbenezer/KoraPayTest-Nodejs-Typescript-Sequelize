@@ -1,6 +1,7 @@
 import * as Sequelize from 'sequelize';
 import { AnswerAttributes, AnswerInstance } from './Answer';
-import { UserAttributes, UserInstance } from '../models/User';
+import { UserAttributes, UserInstance } from './User';
+import { SubscriptionAttributes, SubscriptionInstance } from './Subscription';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface QuestionAttributes {
@@ -12,6 +13,8 @@ export interface QuestionAttributes {
 
   answers?: AnswerAttributes[] | AnswerAttributes['id'][];
   author: UserAttributes | UserAttributes['id'];
+  subscriptions?: SubscriptionAttributes[] | SubscriptionAttributes['id'][];
+  subscribers?: UserAttributes[] | UserAttributes['id'];
 };
 
 export interface QuestionInstance extends Sequelize.Instance<QuestionAttributes>, QuestionAttributes {
@@ -41,7 +44,10 @@ export const QuestionFactory = (sequelize: Sequelize.Sequelize, DataTypes: Seque
     },
     author: {
       type: DataTypes.INTEGER
-    }
+    },
+    // answers: {
+    //   type: DataTypes.ARRAY,
+    // }
   };
 
   const Question = sequelize.define<QuestionInstance, QuestionAttributes>('Question', attributes);
