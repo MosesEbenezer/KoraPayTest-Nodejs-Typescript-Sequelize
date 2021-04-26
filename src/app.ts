@@ -2,9 +2,11 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 // import swaggerUi from 'swagger-ui-express';
+import { tokenGuard } from './middlewares/token-guard'
 
 import { createModels } from './models';
 import Route from './routes/api.route';
+import ProtectedRoutes from './routes/protected.routes'
 
 // const swaggerFile = import('../swagger_output.json');
 
@@ -23,6 +25,8 @@ class Server {
 		this.initExpressMiddleware();
 		this.initRoutes();
 		// this.initSwagger();
+		this.initRouteGuard();
+		this.initProtectedRoutes();
 		this.start();
 	}
 
@@ -48,6 +52,14 @@ class Server {
 
 	initRoutes() {
 		app.use('/', Route);
+	}
+
+	initProtectedRoutes() {
+		app.use('/', ProtectedRoutes);
+	}
+
+	initRouteGuard() {
+		app.use(tokenGuard())
 	}
 
 	// initSwagger() {

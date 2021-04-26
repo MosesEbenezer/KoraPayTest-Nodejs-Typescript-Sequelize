@@ -20,7 +20,10 @@ class QuestionsController extends BaseController {
 			if (!errors.isEmpty())
 				return QuestionsController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 
-			const existingQuestion = await db.Question.findOne(req.body);
+			const existingQuestion = await db.Question.findOne({
+				where: req.body,
+			});
+
 			if (existingQuestion) return QuestionsController._responseError(res, 'KPT009', 'Duplicate Question', null, 409);
 
 			const payload = matchedData(req) as QuestionInstance;

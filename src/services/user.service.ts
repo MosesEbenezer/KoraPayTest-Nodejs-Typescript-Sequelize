@@ -39,7 +39,7 @@ export class UserService {
 					return;
 				}
 
-				UserService._user = db.User.findById(decoded!['id']);
+				UserService._user = db.User.findByPk(decoded!['id']);
 				resolve(true);
 				return;
 			});
@@ -47,7 +47,7 @@ export class UserService {
 	}
 
 	getUserById(id: number | undefined) {
-		return (db.User.findById(id, {
+		return (db.User.findByPk(id, {
 			attributes: UserService.userAttributes,
 		}) as unknown) as bluebird<UserInstance>;
 	}
