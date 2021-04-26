@@ -14,5 +14,9 @@ export const otherValidatorRules = {
   addSubscription: [
     body('user', 'user (id) is required').exists().notEmpty().isNumeric(),
 		body('question', 'question (id) is required').exists().notEmpty().isNumeric(),
+  ],
+  vote: [
+    body('user', 'user (id) is required').exists().notEmpty().isNumeric(),
+		body('answer', 'answer (id) is required').exists().notEmpty().isNumeric(),
   ]
 }

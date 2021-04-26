@@ -7,10 +7,12 @@ import * as Controller from '../controllers';
 const router = Router();
 
 // Protected Routes
-router.post('/question', otherValidatorRules['createQuestion'], Controller.QuestionsController._createQuestion)
-router.post('/answer', otherValidatorRules['addAnswer'], Controller.AnswersController._addAnswer)
-router.post('/subscribe', otherValidatorRules['addSubscription'], Controller.SubscriptionController._addSubcription)
-router.get('/notifications/:userId', Controller.NotificationController._getUserNotifications)
-router.get('/subscriptions/:questionId', Controller.SubscriptionController._getQuestionSubscriptions)
+router.post('/question', otherValidatorRules['createQuestion'], Controller.QuestionsController._createQuestion);
+router.post('/answer', otherValidatorRules['addAnswer'], Controller.AnswersController._addAnswer);
+router.post('/subscribe', otherValidatorRules['addSubscription'], Controller.SubscriptionController._addSubcription);
+router.get('/notifications/:userId', Controller.NotificationController._getUserNotifications);
+router.get('/subscriptions/:questionId', Controller.SubscriptionController._getQuestionSubscriptions);
+router.post('/answer/upvote', otherValidatorRules['vote'], Controller.VoteController._upVoteAnswer);
+router.post('/answer/downvote', otherValidatorRules['vote'], Controller.VoteController._downVoteAnswer);
 
 export default router;
