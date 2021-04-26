@@ -3,9 +3,9 @@ import BaseController from './BaseController';
 import { matchedData } from 'express-validator/filter';
 import { validationResult } from 'express-validator';
 import { AnswerAttributes, AnswerInstance } from '../models/Answer';
+import NotificationController from './NotificationController';
 
 import { createModels } from '../models';
-import { QuestionInstance } from 'models/Question';
 const db = createModels();
 
 class AnswersController extends BaseController {
@@ -21,13 +21,17 @@ class AnswersController extends BaseController {
 			if (!errors.isEmpty())
 				return AnswersController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 				
-				const existingAnswer = await db.Answer.findOne({ where: req.body });
-				if (existingAnswer) return AnswersController._responseError(res, 'KPT009', 'Duplicate Answer', null, 409);
+			const existingAnswer = await db.Answer.findOne({ where: req.body });
+			if (existingAnswer) return AnswersController._responseError(res, 'KPT009', 'Duplicate Answer', null, 409);
 
 			const payload = matchedData(req) as AnswerInstance;
 			const answer: AnswerInstance = await db.Answer.create(payload);
 
-			if (answer) return AnswersController._responseSuccess(res, '00', 'Successfully Added', answer, 200);
+			if (answer) {
+				let id: any = answer.question
+				await NotificationController._addNotification(id)
+				 return AnswersController._responseSuccess(res, '00', 'Successfully Added', answer, 200);
+				}
 		} catch (error) {
 			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}

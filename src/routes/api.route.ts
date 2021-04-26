@@ -17,6 +17,5 @@ router.get('/answer/:id/upvoters', Controller.AnswersController._getAnswerUpvote
 // Remaining
 // upvote and down vote answers
 // get answers alongside the upvote and downvotes
-// subscribe to questions
 
 export default router;

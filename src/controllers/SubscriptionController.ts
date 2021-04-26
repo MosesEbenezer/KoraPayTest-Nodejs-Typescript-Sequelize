@@ -34,25 +34,16 @@ class SubscriptionController extends BaseController {
 		}
 	};
 
-	// static _getQuestionSubscriptions = async (req: Request, res: Response) => {
-	// 	try {
-	// 		const Subscription: QuestionInstance[] = await db.Question.findAll();
-	// 		return SubscriptionController._responseSuccess(res, '00', 'Successfully Fetched', Subscription, 200);
-	// 	} catch (error) {
-	// 		return SubscriptionController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
-	// 	}
-	// };
-
-	// static _getAQuestion = async (req: Request, res: Response) => {
-	// 	try {
-	// 		const question: QuestionInstance[] = await db.Question.findAll({
-	// 			where: { id: req.params.id },
-	// 		});
-	// 		return SubscriptionController._responseSuccess(res, '00', 'Successfully Fetched', question, 200);
-	// 	} catch (error) {
-	// 		return SubscriptionController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
-	// 	}
-	// };
+	static _getQuestionSubscriptions = async (req: Request, res: Response) => {
+		try {
+			const subscription: SubscriptionInstance[] = await db.Subscription.findAll({
+				where: { question: req.params.questionId },
+			});
+			return SubscriptionController._responseSuccess(res, '00', 'Successfully Fetched', subscription, 200);
+		} catch (error) {
+			return SubscriptionController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
+		}
+	};
 }
 
 export default SubscriptionController;
