@@ -1,17 +1,14 @@
 import * as Sequelize from 'sequelize';
-import { QuestionAttributes, QuestionInstance } from './Question';
+import { AnswerAttributes, AnswerInstance } from './Answer';
 import { UserAttributes, UserInstance } from './User';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface UpvoteAttributes {
   id?: number;
-  questionId: number ;
-  userId: UserAttributes | UserAttributes['id'];
+  answer: AnswerAttributes | AnswerAttributes['id'] ;
+  user: UserAttributes | UserAttributes['id'];
   createdAt?: Date;
   updatedAt?: Date;
-
-  // answers?: AnswerAttributes[] | AnswerAttributes['id'][];
-  // author: UserAttributes | UserAttributes['id'];
 };
 
 export interface UpvoteInstance extends Sequelize.Instance<UpvoteAttributes>, UpvoteAttributes {
@@ -20,10 +17,10 @@ export interface UpvoteInstance extends Sequelize.Instance<UpvoteAttributes>, Up
 
 export const UpvoteFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<UpvoteInstance, UpvoteAttributes> => {
   const attributes: SequelizeAttributes<UpvoteAttributes> = {
-    questionId: {
+    answer: {
       type: DataTypes.INTEGER
     },
-    userId: {
+    user: {
       type: DataTypes.INTEGER
     },
   };

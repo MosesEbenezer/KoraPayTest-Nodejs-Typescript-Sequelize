@@ -1,12 +1,12 @@
 import * as Sequelize from 'sequelize';
-import { QuestionAttributes, QuestionInstance } from './Question';
+import { AnswerAttributes, AnswerInstance } from './Answer';
 import { UserAttributes, UserInstance } from './User';
 import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface DownvoteAttributes {
   id?: number;
-  questionId: number ;
-  userId: UserAttributes | UserAttributes['id'];
+  answer: AnswerAttributes | AnswerAttributes['id'] ;
+  user: UserAttributes | UserAttributes['id'];
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -17,10 +17,10 @@ export interface DownvoteInstance extends Sequelize.Instance<DownvoteAttributes>
 
 export const DownvoteFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<DownvoteInstance, DownvoteAttributes> => {
   const attributes: SequelizeAttributes<DownvoteAttributes> = {
-    questionId: {
+    answer: {
       type: DataTypes.INTEGER
     },
-    userId: {
+    user: {
       type: DataTypes.INTEGER
     },
   };

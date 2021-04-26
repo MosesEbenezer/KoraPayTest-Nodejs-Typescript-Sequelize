@@ -41,6 +41,9 @@ class VoteController extends BaseController {
 			if (!errors.isEmpty())
 				return VoteController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
 
+			const answer = await db.Answer.findOne({ where: req.body.answer });
+			if (!answer) return VoteController._responseError(res, 'KPT004', 'Answer not found', null, 404);
+
 			const existingVote = await db.Downvote.findOne({ where: req.body });
 			if (existingVote) return VoteController._responseError(res, 'KPT009', 'Duplicate Vote', null, 409);
 
