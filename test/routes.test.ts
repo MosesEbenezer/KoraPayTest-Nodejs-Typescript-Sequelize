@@ -35,7 +35,7 @@ describe('User API', () => {
 
   // add questions her for protected routes
 	// maybe we can provision a token that will be used to access all protected routes
-	// the associations
+	// the associations. Also heck failing routes.
 
 	it('should get questions', async () => {
 		const res: any = await request(app).get('/questions');
