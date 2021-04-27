@@ -1,14 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-// import swaggerUi from 'swagger-ui-express';
 import { tokenGuard } from './middlewares/token-guard'
 
 import { createModels } from './models';
 import Route from './routes/api.route';
 import ProtectedRoutes from './routes/protected.routes'
-
-// const swaggerFile = import('../swagger_output.json');
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
@@ -24,7 +21,6 @@ class Server {
 		this.initDB();
 		this.initExpressMiddleware();
 		this.initRoutes();
-		// this.initSwagger();
 		this.initRouteGuard();
 		this.initProtectedRoutes();
 		this.start();
@@ -62,10 +58,6 @@ class Server {
 		app.use(tokenGuard())
 	}
 
-	// initSwagger() {
-	// 	app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-	// }
-
 	initDB() {
     const db = createModels();
 		db.sequelize.sync().then(() => {
@@ -75,3 +67,6 @@ class Server {
 }
 
 new Server();
+
+
+export default app

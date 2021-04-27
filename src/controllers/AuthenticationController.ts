@@ -34,7 +34,7 @@ class AuthenticationController extends BaseController {
 			const payload = matchedData(req) as UserInstance;
 			const user = userService.register(payload);
 
-			return user.then((u) => AuthenticationController._responseSuccess(res, '00', 'Successfully Registered', u, 200));
+			return user.then((u) => AuthenticationController._responseSuccess(res, '00', 'Successfully Registered', u, 201));
 		} catch (error) {
 			return AuthenticationController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
