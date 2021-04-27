@@ -27,10 +27,10 @@ export const DownvoteFactory = (sequelize: Sequelize.Sequelize, DataTypes: Seque
 
   const Downvote = sequelize.define<DownvoteInstance, DownvoteAttributes>('Downvote', attributes);
 
-  Downvote.associate = models => { // check this later
-    Downvote.hasMany(models.Answer);
-    Downvote.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
-  };
+  // Downvote.associate = models => { // check this later
+  //   Downvote.hasMany(models.Answer);
+  //   Downvote.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
+  // };
 
   return Downvote;
 };

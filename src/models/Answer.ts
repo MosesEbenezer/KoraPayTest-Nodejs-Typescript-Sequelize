@@ -12,11 +12,6 @@ export interface AnswerAttributes {
   updatedAt?: Date;
   author?: UserAttributes | UserAttributes['id'];
   question?: QuestionAttributes | QuestionAttributes['id'];
-
-  // upvotes?: UpvoteAttributes[] | UpvoteAttributes['id'];
-  // downvotes?: DownvoteAttributes[] | DownvoteInstance['id'];
-  // downvoters?: UserAttributes[] | UserAttributes['id'];
-  // upvoters?: UserAttributes[] | UserAttributes['id'][];
 };
 
 export interface AnswerInstance extends Sequelize.Instance<AnswerAttributes>, AnswerAttributes {
@@ -56,14 +51,15 @@ export const AnswerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
 
   const Answer = sequelize.define<AnswerInstance, AnswerAttributes>('Answer', attributes);
 
-  Answer.associate = models => { // check later
-    Answer.belongsTo(models.Question);
-    Answer.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
-    Answer.belongsToMany(models.User, {
-      through: 'AnswerUpvotes',
-      as: 'upvoters'
-    });
-  };
+  // Answer.associate = models => {
+  //   Answer.belongsTo(models.Upvotes);
+  //   // Ans
+  //   Answer.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
+  //   Answer.belongsToMany(models.User, {
+  //     through: 'AnswerUpvotes',
+  //     as: 'upvoters'
+  //   });
+  // };
 
   return Answer;
 };

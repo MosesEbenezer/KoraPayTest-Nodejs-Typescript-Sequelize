@@ -32,5 +32,15 @@ export const createModels = (): DbInterface => {
     }
   });
 
+  // ASSOCIATIONS
+
+  // Answer Association with Upvotes
+  // db.Answer.belongsTo(db.Upvote);
+  db.Upvote.hasMany(db.Answer);
+
+  // Answer Association with Downvotes
+  // db.Answer.belongsTo(db.Downvote);
+  db.Downvote.hasMany(db.Answer);
+
   return db;
 };

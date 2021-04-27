@@ -39,26 +39,60 @@ class AnswersController extends BaseController {
 
 	static _getAnswers = async (req: Request, res: Response) => {
 		try {
-			const answers: AnswerInstance[] = await db.Answer.findAll();
+			const answers: AnswerInstance[] = await db.Answer.findAll({
+				order: [['id', 'DESC']],
+				include: [
+					{
+						model: db.Upvote,
+						required: false,
+					},
+					{
+						model: db.Downvote,
+						required: false,
+					},
+				],
+			});
 			return AnswersController._responseSuccess(res, '00', 'Successfully Fetched', answers, 200);
 		} catch (error) {
 			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
 	};
 
-	static _getAnswerUpvoters = async (req: Request, res: Response) => {
+	static _getOneAnswer = async (req: Request, res: Response) => {
 		try {
-			db.Answer.findById(req.params.id)
-				.then((answer) => answer?.getUpvoters())
-				.then((upvoters) =>
-					res.status(200).json({
-						user_ids: upvoters?.map((user) => user.id),
-					})
-				);
+			const answer: AnswerInstance[] = await db.Answer.findAll({
+				where: { id: req.params.id },
+				order: [['id', 'DESC']],
+				include: [
+					{
+						model: db.Upvote,
+						required: false,
+					},
+					{
+						model: db.Downvote,
+						required: false,
+					},
+				],
+			});
+			return AnswersController._responseSuccess(res, '00', 'Successfully Fetched', answer, 200);
 		} catch (error) {
-			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
+			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error.toString(), 500);
 		}
 	};
+
+	// static _getAnswerUpvoters = async (req: Request, res: Response) => {
+	// 	try {
+	// 		db.Answer.findById(req.params.id)
+	// 			.then((answer) => answer?.getUpvoters())
+	// 			.then((upvoters) =>
+	// 				res.status(200).json({
+	// 					user_ids: upvoters?.map((user) => user.id),
+	// 				})
+	// 			);
+	// 	} catch (error) {
+	// 		return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
+	// 	}
+	// };
 }
 
 export default AnswersController;

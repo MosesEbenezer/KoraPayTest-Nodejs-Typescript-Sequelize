@@ -27,10 +27,10 @@ export const UpvoteFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
 
   const Upvote = sequelize.define<UpvoteInstance, UpvoteAttributes>('Upvote', attributes);
 
-  Upvote.associate = models => { // check this later
-    Upvote.hasMany(models.Answer);
-    Upvote.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
-  };
+  // Upvote.associate = models => { // check this later
+  //   Upvote.hasMany(models.Answer);
+  //   Upvote.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
+  // };
 
   return Upvote;
 };
