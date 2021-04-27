@@ -53,7 +53,6 @@ export const AnswerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
 
   // Answer.associate = models => {
   //   Answer.belongsTo(models.Upvotes);
-  //   // Ans
   //   Answer.belongsTo(models.User, { as: 'author', foreignKey: 'AuthorId' });
   //   Answer.belongsToMany(models.User, {
   //     through: 'AnswerUpvotes',
