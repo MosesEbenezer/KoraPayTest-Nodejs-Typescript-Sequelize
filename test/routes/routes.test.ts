@@ -107,7 +107,7 @@ describe('User API', () => {
 
 	it('should subscribe to a question', async () => {
 		const res: any = await request(app)
-		.post('/subscribe/1')
+		.post('/subscribe')
 		.set('token', token)
 		.send({
 			user: Math.random(),
