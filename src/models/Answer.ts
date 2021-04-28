@@ -16,24 +16,24 @@ export interface AnswerAttributes {
 
 export interface AnswerInstance extends Sequelize.Instance<AnswerAttributes>, AnswerAttributes {
 
-  getQuestion: Sequelize.BelongsToGetAssociationMixin<QuestionInstance>;
-  setQuestion: Sequelize.BelongsToSetAssociationMixin<QuestionInstance, QuestionInstance['id']>;
-  createQuestion: Sequelize.BelongsToCreateAssociationMixin<QuestionAttributes, QuestionInstance>;
+  // getQuestion: Sequelize.BelongsToGetAssociationMixin<QuestionInstance>;
+  // setQuestion: Sequelize.BelongsToSetAssociationMixin<QuestionInstance, QuestionInstance['id']>;
+  // createQuestion: Sequelize.BelongsToCreateAssociationMixin<QuestionAttributes, QuestionInstance>;
 
-  getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
-  setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance['id']>;
-  createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes, UserInstance>;
+  // getAuthor: Sequelize.BelongsToGetAssociationMixin<UserInstance>;
+  // setAuthor: Sequelize.BelongsToSetAssociationMixin<UserInstance, UserInstance['id']>;
+  // createAuthor: Sequelize.BelongsToCreateAssociationMixin<UserAttributes, UserInstance>;
 
-  getUpvoters: Sequelize.BelongsToManyGetAssociationsMixin<UserInstance>;
-  setUpvoters: Sequelize.BelongsToManySetAssociationsMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
-  addUpvoters: Sequelize.BelongsToManyAddAssociationsMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
-  addUpvoter: Sequelize.BelongsToManyAddAssociationMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
-  createUpvoters: Sequelize.BelongsToManyCreateAssociationMixin<UserAttributes, UserInstance['id'], 'Upvotes'>;
-  removeUpvoter: Sequelize.BelongsToManyRemoveAssociationMixin<UserInstance, UserInstance['id']>;
-  removeUpvoters: Sequelize.BelongsToManyRemoveAssociationsMixin<UserInstance, UserInstance['id']>;
-  hasUpvoter: Sequelize.BelongsToManyHasAssociationMixin<UserInstance, UserInstance['id']>;
-  hasUpvoters: Sequelize.BelongsToManyHasAssociationsMixin<UserInstance, UserInstance['id']>;
-  countUpvoters: Sequelize.BelongsToManyCountAssociationsMixin;
+  // getUpvoters: Sequelize.BelongsToManyGetAssociationsMixin<UserInstance>;
+  // setUpvoters: Sequelize.BelongsToManySetAssociationsMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
+  // addUpvoters: Sequelize.BelongsToManyAddAssociationsMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
+  // addUpvoter: Sequelize.BelongsToManyAddAssociationMixin<UserInstance, UserInstance['id'], 'Upvotes'>;
+  // createUpvoters: Sequelize.BelongsToManyCreateAssociationMixin<UserAttributes, UserInstance['id'], 'Upvotes'>;
+  // removeUpvoter: Sequelize.BelongsToManyRemoveAssociationMixin<UserInstance, UserInstance['id']>;
+  // removeUpvoters: Sequelize.BelongsToManyRemoveAssociationsMixin<UserInstance, UserInstance['id']>;
+  // hasUpvoter: Sequelize.BelongsToManyHasAssociationMixin<UserInstance, UserInstance['id']>;
+  // hasUpvoters: Sequelize.BelongsToManyHasAssociationsMixin<UserInstance, UserInstance['id']>;
+  // countUpvoters: Sequelize.BelongsToManyCountAssociationsMixin;
 };
 
 export const AnswerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<AnswerInstance, AnswerAttributes> => {

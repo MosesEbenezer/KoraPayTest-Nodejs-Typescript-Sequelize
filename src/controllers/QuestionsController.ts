@@ -30,7 +30,7 @@ class QuestionsController extends BaseController {
 			const payload = matchedData(req) as QuestionInstance;
 			const question: QuestionInstance = await db.Question.create(payload);
 
-			if (question) return QuestionsController._responseSuccess(res, '00', 'Successfully Created', question, 200);
+			if (question) return QuestionsController._responseSuccess(res, '00', 'Successfully Created', question, 201);
 		} catch (error) {
 			return QuestionsController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
@@ -56,13 +56,13 @@ class QuestionsController extends BaseController {
 			}
 
 			let query =
-				'SELECT * FROM `answers` a JOIN (SELECT answer, COUNT(*) AS total_upvotes FROM upvotes GROUP BY answer) upv ON a.id = upv.answer JOIN (SELECT answer, COUNT(*) AS total_downvotes FROM downvotes GROUP BY answer) dwv ON a.id = dwv.answer WHERE a.question =' +
+				'SELECT * FROM `answers` a LEFT JOIN (SELECT answer, COUNT(*) AS total_upvotes FROM upvotes GROUP BY answer) upv ON a.id = upv.answer LEFT JOIN (SELECT answer, COUNT(*) AS total_downvotes FROM downvotes GROUP BY answer) dwv ON a.id = dwv.answer WHERE a.question =' +
 				question.id;
 			const answers: AnswerInstance = await db.sequelize.query(query);
 
 			let data = {
 				question: question,
-				answers: answers,
+				answers: answers[0],
 			};
 
 			return QuestionsController._responseSuccess(res, '00', 'Successfully Fetched', data, 200);
