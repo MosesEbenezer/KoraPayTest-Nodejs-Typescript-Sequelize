@@ -20,7 +20,7 @@ class AnswersController extends BaseController {
 			const errors = validationResult(req);
 			if (!errors.isEmpty())
 				return AnswersController._responseError(res, 'KPT004', 'Validation failed', errors.array(), 422);
-				
+
 			const existingAnswer = await db.Answer.findOne({ where: req.body });
 			if (existingAnswer) return AnswersController._responseError(res, 'KPT009', 'Duplicate Answer', null, 409);
 
@@ -28,10 +28,10 @@ class AnswersController extends BaseController {
 			const answer: AnswerInstance = await db.Answer.create(payload);
 
 			if (answer) {
-				let id: any = answer.question
-				await NotificationController._addNotification(id)
-				 return AnswersController._responseSuccess(res, '00', 'Successfully Added', answer, 200);
-				}
+				let id: any = answer.question;
+				await NotificationController._addNotification(id);
+				return AnswersController._responseSuccess(res, '00', 'Successfully Added', answer, 200);
+			}
 		} catch (error) {
 			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
 		}
@@ -60,39 +60,16 @@ class AnswersController extends BaseController {
 
 	static _getOneAnswer = async (req: Request, res: Response) => {
 		try {
-			const answer: AnswerInstance[] = await db.Answer.findAll({
-				where: { id: req.params.id },
-				order: [['id', 'DESC']],
-				include: [
-					{
-						model: db.Upvote,
-						required: false,
-					},
-					{
-						model: db.Downvote,
-						required: false,
-					},
-				],
-			});
+			let query =
+				'SELECT * FROM `answers` a JOIN (SELECT answer, COUNT(*) AS total_upvotes FROM upvotes GROUP BY answer) upv ON a.id = upv.answer JOIN (SELECT answer, COUNT(*) AS total_downvotes FROM downvotes GROUP BY answer) dwv ON a.id = dwv.answer LIMIT 1';
+
+			const answer: AnswerInstance = await db.sequelize.query(query);
+
 			return AnswersController._responseSuccess(res, '00', 'Successfully Fetched', answer, 200);
 		} catch (error) {
 			return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error.toString(), 500);
 		}
 	};
-
-	// static _getAnswerUpvoters = async (req: Request, res: Response) => {
-	// 	try {
-	// 		db.Answer.findById(req.params.id)
-	// 			.then((answer) => answer?.getUpvoters())
-	// 			.then((upvoters) =>
-	// 				res.status(200).json({
-	// 					user_ids: upvoters?.map((user) => user.id),
-	// 				})
-	// 			);
-	// 	} catch (error) {
-	// 		return AnswersController._responseError(res, 'KPT005', 'An Error Occured', error, 500);
-	// 	}
-	// };
 }
 
 export default AnswersController;
