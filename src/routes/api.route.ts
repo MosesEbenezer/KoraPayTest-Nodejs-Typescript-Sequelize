@@ -13,9 +13,4 @@ router.get('/questions', Controller.QuestionsController._getQuestions)
 router.get('/question/:id', Controller.QuestionsController._getAQuestion)
 router.get('/answer/:id', Controller.AnswersController._getOneAnswer)
 
-// router.get('/answer/:id/upvoters', Controller.AnswersController._getAnswerUpvoters)
-
-// Remaining
-// get question alondside answers and answers alongside the upvote and downvotes.
-
 export default router;
