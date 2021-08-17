@@ -38,8 +38,6 @@ npx jest --coverage
 
 PS: More detailed tests would have been written but for time constraints.
 
-Thanks for the opportunity to take part in the exercise.
-
-Best regards.
+Cheers.
 
 
