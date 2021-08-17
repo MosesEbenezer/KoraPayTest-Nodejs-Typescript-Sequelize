@@ -1,6 +1,3 @@
-# Test
-
-Korapay Backend Test
 
 ### Getting Started. 
 run to install all dependencies and get started.
